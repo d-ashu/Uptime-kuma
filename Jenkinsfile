@@ -10,7 +10,7 @@ pipeline{
     stages {
         stage ("Git Pull"){
             steps{
-                git branch: 'main', url: 'https://github.com/Aj7Ay/Uptime-kuma.git'
+                git branch: 'main', url: 'https://github.com/d-ashu/Uptime-kuma.git'
             }
         }
         stage('Install Dependencies') {
@@ -49,15 +49,15 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build -t uptime ."
-                       sh "docker tag uptime sevenajay/uptime:latest "
-                       sh "docker push sevenajay/uptime:latest "
+                       sh "docker tag uptime dalabehera/uptime:latest "
+                       sh "docker push dalabehera/uptime:latest "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image sevenajay/uptime:latest > trivy.json" 
+                sh "trivy image dalabehera/uptime:latest > trivy.json" 
             }
         }
         stage ("Remove container") {
